@@ -1,0 +1,56 @@
+server:
+    port : 9000
+    address : localhost
+
+eureka:
+    instance :
+         prefer-ip-address : true
+         hostname : demoService
+         ip-address : ${server.address}
+         instance-id : ${server.address}:${spring.application.name}:${server.port}
+    client: 
+         serviceUrl:
+             defaultZone: http://localhost:8761/eureka
+
+management:
+     security:
+        enabled : false
+     endpoint :
+           metrics :
+              enabled : true
+
+           web:
+            exposure :
+               include : health, info , beans
+
+           prometheus:
+             enabled : true
+           health :
+             show-details : always
+           beans :
+              enabled : true
+
+     metrics:
+       export :
+           prometheus :
+               enabled : true
+
+     endpoints:
+          web :
+            exposure :
+               include : health, info, beans
+
+logging:
+     level:
+         root: WARN
+     com :
+        example :
+           demo : TRACE
+
+
+spring :
+    application:
+         name : demoService
+
+
+
